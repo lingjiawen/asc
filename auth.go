@@ -161,7 +161,10 @@ func (g *standardJWTGenerator) IsValid() bool {
 }
 
 func (g *standardJWTGenerator) claims() jwt.Claims {
-	expiry := time.Now().Add(g.expireDuration)
+	// 当前时间减去1分钟
+	adjustedTime := time.Now().Add(-1 * time.Minute)
+	// 基于调整后的时间设置过期时间
+	expiry := adjustedTime.Add(g.expireDuration)
 
 	return jwt.StandardClaims{
 		Audience:  jwt.ClaimStrings{"appstoreconnect-v1"},
