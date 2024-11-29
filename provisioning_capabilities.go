@@ -87,6 +87,16 @@ const (
 	CapabilityTypeWallet CapabilityType = "WALLET"
 	// CapabilityTypeWirelessAccessoryConfiguration is a capability type for WirelessAccessoryConfiguration.
 	CapabilityTypeWirelessAccessoryConfiguration CapabilityType = "WIRELESS_ACCESSORY_CONFIGURATION"
+	// CapabilityTypeExtendedVirtualAddressing is a capability type for ExtendedVirtualAddressing.
+	CapabilityTypeExtendedVirtualAddressing CapabilityType = "EXTENDED_VIRTUAL_ADDRESSING"
+
+	CapabilityTypeIncreasedMemoryLimit CapabilityType = "INCREASED_MEMORY_LIMIT"
+
+	CapabilityTypeUserNotificationsCommunication CapabilityType = "USERNOTIFICATIONS_COMMUNICATION"
+
+	CapabilityTypeWeatherKit CapabilityType = "WEATHERKIT"
+
+	CapabilityTypeHealthKitRecalibrateEstimates CapabilityType = "HEALTHKIT_RECALIBRATE_ESTIMATES"
 )
 
 // BundleIDCapability defines model for BundleIdCapability.
