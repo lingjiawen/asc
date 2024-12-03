@@ -103,6 +103,45 @@ const (
 	CapabilityTypeHealthKitBackgroundDelivery CapabilityType = "HEALTHKIT_BACKGROUND_DELIVERY" // [新增]
 )
 
+var AllCapabilityTypes = []CapabilityType{
+	CapabilityTypeAccessWifiInformation,
+	CapabilityTypeAppleIDAuth,
+	CapabilityTypeApplePay,
+	CapabilityTypeAppGroups,
+	CapabilityTypeAssociatedDomains,
+	CapabilityTypeAutoFillCredentialProvider,
+	CapabilityTypeClassKit,
+	CapabilityTypeCoreMediaHLSLowLatency,
+	CapabilityTypeDataProtection,
+	CapabilityTypeGameCenter,
+	CapabilityTypeHealthKit,
+	CapabilityTypeHealthKitRecalibrateEstimates,
+	CapabilityTypeHomeKit,
+	CapabilityTypeHotSpot,
+	CapabilityTypeiCloud,
+	CapabilityTypeInterAppAudio,
+	CapabilityTypeInAppPurchase,
+	CapabilityTypeMaps,
+	CapabilityTypeMultipath,
+	CapabilityTypeNetworkCustomProtocol,
+	CapabilityTypeNetworkExtensions,
+	CapabilityTypeNFCTagReading,
+	CapabilityTypePersonalVPN,
+	CapabilityTypePushNotifications,
+	CapabilityTypeSiriKit,
+	CapabilityTypeSystemExtensionInstall,
+	CapabilityTypeUserManagement,
+	CapabilityTypeWallet,
+	CapabilityTypeWirelessAccessoryConfiguration,
+	CapabilityTypeExtendedVirtualAddressing,
+	CapabilityTypeIncreasedMemoryLimit,
+	CapabilityTypeUserNotificationsCommunication,
+	CapabilityTypeWeatherKit,
+	CapabilityTypeHealthKitAccess,
+	CapabilityTypeKeychainAccessGroups,
+	CapabilityTypeHealthKitBackgroundDelivery,
+}
+
 var entitlementToCapability = map[string]CapabilityType{
 	"com.apple.developer.healthkit.access":                                     CapabilityTypeHealthKitAccess,             // [新增]
 	"keychain-access-groups":                                                   CapabilityTypeKeychainAccessGroups,        // [新增]
