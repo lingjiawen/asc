@@ -100,38 +100,94 @@ const (
 )
 
 var entitlementToCapability = map[string]CapabilityType{
-	"com.apple.developer.associated-domains":                                   CapabilityTypeAssociatedDomains,
-	"aps-environment":                                                          CapabilityTypePushNotifications,
-	"com.apple.developer.siri":                                                 CapabilityTypeSiriKit,
-	"com.apple.developer.healthkit":                                            CapabilityTypeHealthKit,
-	"com.apple.developer.healthkit.access":                                     CapabilityTypeHealthKit,
-	"com.apple.developer.healthkit.background-delivery":                        CapabilityTypeHealthKit,
-	"com.apple.developer.healthkit.recalibrate-estimates":                      CapabilityTypeHealthKitRecalibrateEstimates,
-	"com.apple.developer.weatherkit":                                           CapabilityTypeWeatherKit,
-	"com.apple.developer.homekit":                                              CapabilityTypeHomeKit,
-	"com.apple.developer.kernel.extended-virtual-addressing":                   CapabilityTypeExtendedVirtualAddressing,
-	"com.apple.developer.kernel.increased-memory-limit":                        CapabilityTypeIncreasedMemoryLimit,
-	"com.apple.developer.nfc.readersession.formats":                            CapabilityTypeNFCTagReading,
-	"com.apple.developer.networking.networkextension":                          CapabilityTypeNetworkExtensions,
-	"com.apple.developer.networking.vpn.api":                                   CapabilityTypePersonalVPN,
 	"com.apple.developer.networking.wifi-info":                                 CapabilityTypeAccessWifiInformation,
-	"com.apple.developer.networking.multipath":                                 CapabilityTypeMultipath,
-	"com.apple.developer.pass-type-identifiers":                                CapabilityTypeWallet,
-	"com.apple.developer.authentication-services.autofill-credential-provider": CapabilityTypeAutoFillCredentialProvider,
-	"com.apple.developer.game-center":                                          CapabilityTypeGameCenter,
-	"com.apple.developer.usernotifications.communication":                      CapabilityTypeUserNotificationsCommunication,
-	"com.apple.external-accessory.wireless-configuration":                      CapabilityTypeWirelessAccessoryConfiguration,
-	"inter-app-audio":                                                          CapabilityTypeInterAppAudio,
-	"keychain-access-groups":                                                   CapabilityTypeAppGroups,
-	"com.apple.developer.ClassKit-environment":                                 CapabilityTypeClassKit,
-	"com.apple.developer.coremedia.hls.low-latency":                            CapabilityTypeCoreMediaHLSLowLatency,
+	"com.apple.developer.appleid-auth":                                         CapabilityTypeAppleIDAuth, // [新增]
 	"com.apple.developer.in-app-payments":                                      CapabilityTypeApplePay,
 	"com.apple.security.application-groups":                                    CapabilityTypeAppGroups,
+	"com.apple.developer.associated-domains":                                   CapabilityTypeAssociatedDomains,
+	"com.apple.developer.authentication-services.autofill-credential-provider": CapabilityTypeAutoFillCredentialProvider,
+	"com.apple.developer.ClassKit-environment":                                 CapabilityTypeClassKit,
+	"com.apple.developer.coremedia.hls.low-latency":                            CapabilityTypeCoreMediaHLSLowLatency,
+	"com.apple.developer.default-data-protection":                              CapabilityTypeDataProtection, // [新增]
+	"com.apple.developer.game-center":                                          CapabilityTypeGameCenter,
+	"com.apple.developer.healthkit":                                            CapabilityTypeHealthKit,
+	"com.apple.developer.healthkit.recalibrate-estimates":                      CapabilityTypeHealthKitRecalibrateEstimates, // [新增]
+	"com.apple.developer.homekit":                                              CapabilityTypeHomeKit,
+	"com.apple.developer.hotspot":                                              CapabilityTypeHotSpot, // [新增]
+	"com.apple.developer.icloud-services":                                      CapabilityTypeiCloud,
+	"inter-app-audio":                                                          CapabilityTypeInterAppAudio,
+	"com.apple.developer.in-app-purchase":                                      CapabilityTypeInAppPurchase, // [新增]
+	"com.apple.developer.maps":                                                 CapabilityTypeMaps,          // [新增]
+	"com.apple.developer.networking.multipath":                                 CapabilityTypeMultipath,
+	"com.apple.developer.networking.custom-protocol":                           CapabilityTypeNetworkCustomProtocol, // [新增]
+	"com.apple.developer.networking.networkextension":                          CapabilityTypeNetworkExtensions,
+	"com.apple.developer.nfc.readersession.formats":                            CapabilityTypeNFCTagReading,
+	"com.apple.developer.networking.vpn.api":                                   CapabilityTypePersonalVPN,
+	"aps-environment":                                                          CapabilityTypePushNotifications,
+	"com.apple.developer.siri":                                                 CapabilityTypeSiriKit,
+	"com.apple.developer.system-extension.install":                             CapabilityTypeSystemExtensionInstall, // [新增]
+	"com.apple.developer.user-management":                                      CapabilityTypeUserManagement,         // [新增]
+	"com.apple.developer.pass-type-identifiers":                                CapabilityTypeWallet,
+	"com.apple.external-accessory.wireless-configuration":                      CapabilityTypeWirelessAccessoryConfiguration,
+	"com.apple.developer.kernel.extended-virtual-addressing":                   CapabilityTypeExtendedVirtualAddressing,
+	"com.apple.developer.kernel.increased-memory-limit":                        CapabilityTypeIncreasedMemoryLimit,
+	"com.apple.developer.usernotifications.communication":                      CapabilityTypeUserNotificationsCommunication, // [新增]
+	"com.apple.developer.weatherkit":                                           CapabilityTypeWeatherKit,
+}
+
+var capabilityToChineseMap = map[CapabilityType]string{
+	CapabilityTypeAccessWifiInformation:          "Wi-Fi 信息访问",
+	CapabilityTypeAppleIDAuth:                    "Apple ID 认证", // [新增]
+	CapabilityTypeApplePay:                       "Apple Pay 支付",
+	CapabilityTypeAppGroups:                      "应用组共享",
+	CapabilityTypeAssociatedDomains:              "关联域名",
+	CapabilityTypeAutoFillCredentialProvider:     "自动填充凭据",
+	CapabilityTypeClassKit:                       "ClassKit 支持",
+	CapabilityTypeCoreMediaHLSLowLatency:         "低延迟 HLS 流媒体",
+	CapabilityTypeDataProtection:                 "数据保护", // [新增]
+	CapabilityTypeGameCenter:                     "Game Center 支持",
+	CapabilityTypeHealthKit:                      "健康数据",
+	CapabilityTypeHealthKitRecalibrateEstimates:  "健康数据校准", // [新增]
+	CapabilityTypeHomeKit:                        "家庭自动化",
+	CapabilityTypeHotSpot:                        "个人热点：不允许",
+	CapabilityTypeiCloud:                         "iCloud 支持",
+	CapabilityTypeInterAppAudio:                  "应用间音频",
+	CapabilityTypeInAppPurchase:                  "应用内购买：不允许",
+	CapabilityTypeMaps:                           "地图服务", // [新增]
+	CapabilityTypeMultipath:                      "多路径传输",
+	CapabilityTypeNetworkCustomProtocol:          "自定义网络协议", // [新增]
+	CapabilityTypeNetworkExtensions:              "网络扩展功能",
+	CapabilityTypeNFCTagReading:                  "NFC 标签读取",
+	CapabilityTypePersonalVPN:                    "个人 VPN",
+	CapabilityTypePushNotifications:              "推送通知",
+	CapabilityTypeSiriKit:                        "Siri 支持",
+	CapabilityTypeSystemExtensionInstall:         "系统扩展安装", // [新增]
+	CapabilityTypeUserManagement:                 "用户管理",   // [新增]
+	CapabilityTypeWallet:                         "Wallet 支持",
+	CapabilityTypeWirelessAccessoryConfiguration: "无线配件配置",
+	CapabilityTypeExtendedVirtualAddressing:      "扩展虚拟地址支持",
+	CapabilityTypeIncreasedMemoryLimit:           "增加内存限制",
+	CapabilityTypeUserNotificationsCommunication: "用户通知通信", // [新增]
+	CapabilityTypeWeatherKit:                     "天气服务",
 }
 
 func GetCapabilityForEntitlement(entitlement string) (CapabilityType, bool) {
 	capability, exists := entitlementToCapability[entitlement]
 	return capability, exists
+}
+
+func GetCapabilityChinese(entitlement string) string {
+	capability, exists := entitlementToCapability[entitlement]
+	if !exists {
+		// 如果 entitlement 不存在，直接返回 entitlement
+		return entitlement
+	}
+	chinese, exists := capabilityToChineseMap[capability]
+	if !exists {
+		// 如果没有定义中文描述，返回 capability
+		return string(capability)
+	}
+	return chinese
 }
 
 // BundleIDCapability defines model for BundleIdCapability.
