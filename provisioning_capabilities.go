@@ -225,15 +225,22 @@ func GetCapabilityForEntitlement(entitlement string) (CapabilityType, bool) {
 	return capability, exists
 }
 
-func GetCapabilityChinese(entitlement string) string {
+func GetCapabilityChineseByEntitlement(entitlement string) string {
+	// 检查 Entitlement 是否映射到 Capability
 	capability, exists := entitlementToCapability[entitlement]
 	if !exists {
 		// 如果 entitlement 不存在，直接返回 entitlement
 		return entitlement
 	}
+	// 转到通过 Capability 获取中文描述的方法
+	return GetCapabilityChineseByCapability(capability)
+}
+
+func GetCapabilityChineseByCapability(capability CapabilityType) string {
+	// 检查 Capability 是否有中文描述
 	chinese, exists := capabilityToChineseMap[capability]
 	if !exists {
-		// 如果没有定义中文描述，返回 capability
+		// 如果没有定义中文描述，返回 Capability 本身
 		return string(capability)
 	}
 	return chinese
