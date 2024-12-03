@@ -97,9 +97,16 @@ const (
 	CapabilityTypeWeatherKit CapabilityType = "WEATHERKIT"
 
 	CapabilityTypeHealthKitRecalibrateEstimates CapabilityType = "HEALTHKIT_RECALIBRATE_ESTIMATES"
+
+	CapabilityTypeHealthKitAccess             CapabilityType = "HEALTHKIT_ACCESS"              // [新增]
+	CapabilityTypeKeychainAccessGroups        CapabilityType = "KEYCHAIN_ACCESS_GROUPS"        // [新增]
+	CapabilityTypeHealthKitBackgroundDelivery CapabilityType = "HEALTHKIT_BACKGROUND_DELIVERY" // [新增]
 )
 
 var entitlementToCapability = map[string]CapabilityType{
+	"com.apple.developer.healthkit.access":                                     CapabilityTypeHealthKitAccess,             // [新增]
+	"keychain-access-groups":                                                   CapabilityTypeKeychainAccessGroups,        // [新增]
+	"com.apple.developer.healthkit.background-delivery":                        CapabilityTypeHealthKitBackgroundDelivery, // [新增]
 	"com.apple.developer.networking.wifi-info":                                 CapabilityTypeAccessWifiInformation,
 	"com.apple.developer.appleid-auth":                                         CapabilityTypeAppleIDAuth, // [新增]
 	"com.apple.developer.in-app-payments":                                      CapabilityTypeApplePay,
@@ -169,6 +176,9 @@ var capabilityToChineseMap = map[CapabilityType]string{
 	CapabilityTypeIncreasedMemoryLimit:           "增加内存限制",
 	CapabilityTypeUserNotificationsCommunication: "用户通知通信", // [新增]
 	CapabilityTypeWeatherKit:                     "天气服务",
+	CapabilityTypeHealthKitAccess:                "健康数据访问权限", // [新增]
+	CapabilityTypeKeychainAccessGroups:           "钥匙串访问组",   // [新增]
+	CapabilityTypeHealthKitBackgroundDelivery:    "健康数据后台更新", // [新增]
 }
 
 func GetCapabilityForEntitlement(entitlement string) (CapabilityType, bool) {
