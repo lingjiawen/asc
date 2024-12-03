@@ -99,6 +99,41 @@ const (
 	CapabilityTypeHealthKitRecalibrateEstimates CapabilityType = "HEALTHKIT_RECALIBRATE_ESTIMATES"
 )
 
+var entitlementToCapability = map[string]CapabilityType{
+	"com.apple.developer.associated-domains":                                   CapabilityTypeAssociatedDomains,
+	"aps-environment":                                                          CapabilityTypePushNotifications,
+	"com.apple.developer.siri":                                                 CapabilityTypeSiriKit,
+	"com.apple.developer.healthkit":                                            CapabilityTypeHealthKit,
+	"com.apple.developer.healthkit.access":                                     CapabilityTypeHealthKit,
+	"com.apple.developer.healthkit.background-delivery":                        CapabilityTypeHealthKit,
+	"com.apple.developer.healthkit.recalibrate-estimates":                      CapabilityTypeHealthKitRecalibrateEstimates,
+	"com.apple.developer.weatherkit":                                           CapabilityTypeWeatherKit,
+	"com.apple.developer.homekit":                                              CapabilityTypeHomeKit,
+	"com.apple.developer.kernel.extended-virtual-addressing":                   CapabilityTypeExtendedVirtualAddressing,
+	"com.apple.developer.kernel.increased-memory-limit":                        CapabilityTypeIncreasedMemoryLimit,
+	"com.apple.developer.nfc.readersession.formats":                            CapabilityTypeNFCTagReading,
+	"com.apple.developer.networking.networkextension":                          CapabilityTypeNetworkExtensions,
+	"com.apple.developer.networking.vpn.api":                                   CapabilityTypePersonalVPN,
+	"com.apple.developer.networking.wifi-info":                                 CapabilityTypeAccessWifiInformation,
+	"com.apple.developer.networking.multipath":                                 CapabilityTypeMultipath,
+	"com.apple.developer.pass-type-identifiers":                                CapabilityTypeWallet,
+	"com.apple.developer.authentication-services.autofill-credential-provider": CapabilityTypeAutoFillCredentialProvider,
+	"com.apple.developer.game-center":                                          CapabilityTypeGameCenter,
+	"com.apple.developer.usernotifications.communication":                      CapabilityTypeUserNotificationsCommunication,
+	"com.apple.external-accessory.wireless-configuration":                      CapabilityTypeWirelessAccessoryConfiguration,
+	"inter-app-audio":                                                          CapabilityTypeInterAppAudio,
+	"keychain-access-groups":                                                   CapabilityTypeAppGroups,
+	"com.apple.developer.ClassKit-environment":                                 CapabilityTypeClassKit,
+	"com.apple.developer.coremedia.hls.low-latency":                            CapabilityTypeCoreMediaHLSLowLatency,
+	"com.apple.developer.in-app-payments":                                      CapabilityTypeApplePay,
+	"com.apple.security.application-groups":                                    CapabilityTypeAppGroups,
+}
+
+func GetCapabilityForEntitlement(entitlement string) (CapabilityType, bool) {
+	capability, exists := entitlementToCapability[entitlement]
+	return capability, exists
+}
+
 // BundleIDCapability defines model for BundleIdCapability.
 //
 // https://developer.apple.com/documentation/appstoreconnectapi/bundleidcapability
