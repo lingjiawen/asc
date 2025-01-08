@@ -195,10 +195,10 @@ var capabilityToChineseMap = map[CapabilityType]string{
 	CapabilityTypeHealthKit:                      "健康数据",
 	CapabilityTypeHealthKitRecalibrateEstimates:  "健康数据校准", // [新增]
 	CapabilityTypeHomeKit:                        "家庭自动化",
-	CapabilityTypeHotSpot:                        "个人热点：不允许",
+	CapabilityTypeHotSpot:                        "个人热点",
 	CapabilityTypeiCloud:                         "iCloud 支持",
 	CapabilityTypeInterAppAudio:                  "应用间音频",
-	CapabilityTypeInAppPurchase:                  "应用内购买：不允许",
+	CapabilityTypeInAppPurchase:                  "应用内购买",
 	CapabilityTypeMaps:                           "地图服务", // [新增]
 	CapabilityTypeMultipath:                      "多路径传输",
 	CapabilityTypeNetworkCustomProtocol:          "自定义网络协议", // [新增]
