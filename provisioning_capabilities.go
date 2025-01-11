@@ -90,7 +90,8 @@ const (
 	// CapabilityTypeExtendedVirtualAddressing is a capability type for ExtendedVirtualAddressing.
 	CapabilityTypeExtendedVirtualAddressing CapabilityType = "EXTENDED_VIRTUAL_ADDRESSING"
 
-	CapabilityTypeIncreasedMemoryLimit CapabilityType = "INCREASED_MEMORY_LIMIT"
+	CapabilityTypeIncreasedMemoryLimit          CapabilityType = "INCREASED_MEMORY_LIMIT"
+	CapabilityTypeIncreasedMemoryLimitDebugging CapabilityType = "INCREASED_MEMORY_LIMIT_DEBUGGING"
 
 	CapabilityTypeUserNotificationsCommunication CapabilityType = "USERNOTIFICATIONS_COMMUNICATION"
 
@@ -135,6 +136,7 @@ var AllCapabilityTypes = []CapabilityType{
 	CapabilityTypeWirelessAccessoryConfiguration,
 	CapabilityTypeExtendedVirtualAddressing,
 	CapabilityTypeIncreasedMemoryLimit,
+	CapabilityTypeIncreasedMemoryLimitDebugging,
 	CapabilityTypeUserNotificationsCommunication,
 	CapabilityTypeWeatherKit,
 	CapabilityTypeHealthKitAccess,
@@ -177,6 +179,7 @@ var entitlementToCapability = map[string]CapabilityType{
 	"com.apple.external-accessory.wireless-configuration":                      CapabilityTypeWirelessAccessoryConfiguration,
 	"com.apple.developer.kernel.extended-virtual-addressing":                   CapabilityTypeExtendedVirtualAddressing,
 	"com.apple.developer.kernel.increased-memory-limit":                        CapabilityTypeIncreasedMemoryLimit,
+	"com.apple.developer.kernel.increased-memory-limit-debugging":              CapabilityTypeIncreasedMemoryLimitDebugging,
 	"com.apple.developer.usernotifications.communication":                      CapabilityTypeUserNotificationsCommunication, // [新增]
 	"com.apple.developer.weatherkit":                                           CapabilityTypeWeatherKit,
 }
@@ -212,7 +215,8 @@ var capabilityToChineseMap = map[CapabilityType]string{
 	CapabilityTypeWallet:                         "Wallet 支持",
 	CapabilityTypeWirelessAccessoryConfiguration: "无线配件配置",
 	CapabilityTypeExtendedVirtualAddressing:      "扩展虚拟地址支持",
-	CapabilityTypeIncreasedMemoryLimit:           "增加内存限制",
+	CapabilityTypeIncreasedMemoryLimit:           "拓展内存限制",
+	CapabilityTypeIncreasedMemoryLimitDebugging:  "拓展内存限制调试",
 	CapabilityTypeUserNotificationsCommunication: "用户通知通信", // [新增]
 	CapabilityTypeWeatherKit:                     "天气服务",
 	CapabilityTypeHealthKitAccess:                "健康数据访问权限", // [新增]
