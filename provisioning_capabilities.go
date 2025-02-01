@@ -94,6 +94,7 @@ const (
 	CapabilityTypeIncreasedMemoryLimitDebugging CapabilityType = "INCREASED_MEMORY_LIMIT_DEBUGGING"
 
 	CapabilityTypeUserNotificationsCommunication CapabilityType = "USERNOTIFICATIONS_COMMUNICATION"
+	CapabilityTypeUserNotificationsTimesenstive  CapabilityType = "USERNOTIFICATIONS_TIMESENSITIVE"
 
 	CapabilityTypeWeatherKit CapabilityType = "WEATHERKIT"
 
@@ -138,6 +139,7 @@ var AllCapabilityTypes = []CapabilityType{
 	CapabilityTypeIncreasedMemoryLimit,
 	CapabilityTypeIncreasedMemoryLimitDebugging,
 	CapabilityTypeUserNotificationsCommunication,
+	CapabilityTypeUserNotificationsTimesenstive,
 	CapabilityTypeWeatherKit,
 	CapabilityTypeHealthKitAccess,
 	CapabilityTypeKeychainAccessGroups,
@@ -181,6 +183,7 @@ var entitlementToCapability = map[string]CapabilityType{
 	"com.apple.developer.kernel.increased-memory-limit":                        CapabilityTypeIncreasedMemoryLimit,
 	"com.apple.developer.kernel.increased-memory-limit-debugging":              CapabilityTypeIncreasedMemoryLimitDebugging,
 	"com.apple.developer.usernotifications.communication":                      CapabilityTypeUserNotificationsCommunication, // [新增]
+	"com.apple.developer.usernotifications.timesenstive":                       CapabilityTypeUserNotificationsTimesenstive,  // [新增]
 	"com.apple.developer.weatherkit":                                           CapabilityTypeWeatherKit,
 }
 
@@ -217,7 +220,8 @@ var capabilityToChineseMap = map[CapabilityType]string{
 	CapabilityTypeExtendedVirtualAddressing:      "扩展虚拟地址支持",
 	CapabilityTypeIncreasedMemoryLimit:           "拓展内存限制",
 	CapabilityTypeIncreasedMemoryLimitDebugging:  "拓展内存限制调试",
-	CapabilityTypeUserNotificationsCommunication: "用户通知通信", // [新增]
+	CapabilityTypeUserNotificationsCommunication: "基础通知权限", // [新增]
+	CapabilityTypeUserNotificationsTimesenstive:  "实时通知权限", // [新增]
 	CapabilityTypeWeatherKit:                     "天气服务",
 	CapabilityTypeHealthKitAccess:                "健康数据访问权限", // [新增]
 	CapabilityTypeKeychainAccessGroups:           "钥匙串访问组",   // [新增]
