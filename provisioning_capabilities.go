@@ -182,6 +182,7 @@ var entitlementToCapability = map[string]CapabilityType{
 	"com.apple.developer.kernel.extended-virtual-addressing":                   CapabilityTypeExtendedVirtualAddressing,
 	"com.apple.developer.kernel.increased-memory-limit":                        CapabilityTypeIncreasedMemoryLimit,
 	"com.apple.developer.kernel.increased-memory-limit-debugging":              CapabilityTypeIncreasedMemoryLimitDebugging,
+	"com.apple.developer.kernel.increased-debugging-memory-limit":              CapabilityTypeIncreasedMemoryLimitDebugging,
 	"com.apple.developer.usernotifications.communication":                      CapabilityTypeUserNotificationsCommunication, // [新增]
 	"com.apple.developer.usernotifications.timesenstive":                       CapabilityTypeUserNotificationsTimesenstive,  // [新增]
 	"com.apple.developer.weatherkit":                                           CapabilityTypeWeatherKit,
