@@ -185,6 +185,15 @@ var entitlementToCapability = map[string]CapabilityType{
 	"com.apple.developer.usernotifications.communication":                      CapabilityTypeUserNotificationsCommunication, // [新增]
 	"com.apple.developer.usernotifications.timesenstive":                       CapabilityTypeUserNotificationsTimesenstive,  // [新增]
 	"com.apple.developer.weatherkit":                                           CapabilityTypeWeatherKit,
+	"com.apple.developer.ubiquity-kvstore-identifier":                          "ubiquity-kvstore-identifier",
+	"com.apple.developer.kernel.increased-debugging-memory-limit":              CapabilityTypeIncreasedMemoryLimitDebugging,
+	"com.apple.developer.ubiquity-container-identifiers":                       "ubiquity-container-identifiers",
+	"com.apple.developer.applesignin":                                          CapabilityTypeAppleIDAuth,
+	"com.apple.developer.usernotifications.time-sensitive":                     CapabilityTypeUserNotificationsTimesenstive,
+	"application-identifier":                                                   "application-identifier",
+	"com.apple.developer.team-identifier":                                      "developer.team-identifier",
+	"get-task-allow":                                                           "get-task-allow",
+	"com.apple.developer.networking.HotspotConfiguration":                      "networking.HotspotConfiguration",
 }
 
 var capabilityToChineseMap = map[CapabilityType]string{
