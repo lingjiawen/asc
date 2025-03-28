@@ -186,7 +186,6 @@ var entitlementToCapability = map[string]CapabilityType{
 	"com.apple.developer.usernotifications.timesenstive":                       CapabilityTypeUserNotificationsTimesenstive,  // [新增]
 	"com.apple.developer.weatherkit":                                           CapabilityTypeWeatherKit,
 	"com.apple.developer.ubiquity-kvstore-identifier":                          CapabilityTypeiCloud,
-	"com.apple.developer.kernel.increased-debugging-memory-limit":              CapabilityTypeIncreasedMemoryLimitDebugging,
 	"com.apple.developer.ubiquity-container-identifiers":                       CapabilityTypeiCloud,
 	"com.apple.developer.applesignin":                                          CapabilityTypeAppleIDAuth,
 	"com.apple.developer.usernotifications.time-sensitive":                     CapabilityTypeUserNotificationsTimesenstive,
