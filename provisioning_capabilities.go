@@ -190,9 +190,9 @@ var entitlementToCapability = map[string]CapabilityType{
 	"com.apple.developer.ubiquity-container-identifiers":                       CapabilityTypeiCloud,
 	"com.apple.developer.applesignin":                                          CapabilityTypeAppleIDAuth,
 	"com.apple.developer.usernotifications.time-sensitive":                     CapabilityTypeUserNotificationsTimesenstive,
-	"application-identifier":                                                   "",
-	"com.apple.developer.team-identifier":                                      "",
-	"get-task-allow":                                                           "",
+	"application-identifier":                                                   "application-identifier",
+	"com.apple.developer.team-identifier":                                      "team-identifier",
+	"get-task-allow":                                                           "get-task-allow",
 	"com.apple.developer.networking.HotspotConfiguration":                      CapabilityTypeHotSpot,
 }
 
