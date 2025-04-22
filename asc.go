@@ -42,7 +42,7 @@ import (
 const (
 	defaultBaseURL = "https://api.appstoreconnect.apple.com/v1/"
 	userAgent      = "asc-go"
-	defaultTimeout = 10 * time.Second
+	defaultTimeout = 12 * time.Second
 
 	headerRateLimit = "X-Rate-Limit"
 )
