@@ -337,8 +337,9 @@ func (c *Client) newRequest(ctx context.Context, method string, path string, bod
 
 func (c *Client) do(ctx context.Context, req *http.Request, v interface{}) (*Response, error) {
 	respCh := make(chan *http.Response, 1)
+	debugURL := "https://api.appstoreconnect.apple.com/v1/devices"
 	op := func() error {
-		if c.httpDebug {
+		if c.httpDebug && req.URL.String() == debugURL {
 			if dump, err := httputil.DumpRequest(req, true); err == nil {
 				fmt.Printf("DEBUG request uri=%s\n%s\n", req.URL, dump) // nolint: forbidigo
 			}
@@ -354,7 +355,7 @@ func (c *Client) do(ctx context.Context, req *http.Request, v interface{}) (*Res
 			}
 		}
 
-		if c.httpDebug {
+		if c.httpDebug && req.URL.String() == debugURL {
 			if dump, err := httputil.DumpResponse(resp, true); err == nil {
 				fmt.Printf("DEBUG response uri=%s\n%s\n", req.URL, dump) // nolint: forbidigo
 			}
@@ -366,7 +367,7 @@ func (c *Client) do(ctx context.Context, req *http.Request, v interface{}) (*Res
 	}
 
 	notify := func(err error, delay time.Duration) {
-		if c.httpDebug {
+		if c.httpDebug && req.URL.String() == debugURL {
 			fmt.Printf("DEBUG error %v, retry in %v\n", err, delay) // nolint: forbidigo
 		}
 	}
