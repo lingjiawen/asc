@@ -90,7 +90,7 @@ func NewClient(httpClient *http.Client) *Client {
 				DisableKeepAlives: true,           // false: 默认值, 启用 Keep-Alive，复用 TCP 连接（同一主机多次请求可共用连接）/ 禁用 Keep-Alive，每次请求完成后强制关闭连接（短连接模式）
 				ForceAttemptHTTP2: false,          // 启用HTTP/2
 			},
-			Timeout: 60 * time.Second, // 从请求开始到响应体完全读取的总超时
+			Timeout: 40 * time.Second, // 从请求开始到响应体完全读取的总超时
 		}
 	}
 
