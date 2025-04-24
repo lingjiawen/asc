@@ -92,6 +92,8 @@ func NewClient(httpClient *http.Client) *Client {
 			},
 			Timeout: 40 * time.Second, // 从请求开始到响应体完全读取的总超时
 		}
+	} else {
+		httpClient.Timeout = 40 * time.Second
 	}
 
 	baseURL, _ := url.Parse(defaultBaseURL)
