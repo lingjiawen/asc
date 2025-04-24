@@ -354,7 +354,7 @@ func (c *Client) newRequest(ctx context.Context, method string, path string, bod
 	return req, nil
 }
 
-func (c *Client) do(ctx context.Context, req *http.Request, v interface{}) (*Response, error) {
+func (c *Client) doBackup(ctx context.Context, req *http.Request, v interface{}) (*Response, error) {
 	respCh := make(chan *http.Response, 1)
 	debugURL := "https://api.appstoreconnect.apple.com/v1/devices"
 	op := func() error {
@@ -405,6 +405,51 @@ func (c *Client) do(ctx context.Context, req *http.Request, v interface{}) (*Res
 	if err != nil {
 		return response, err
 	}
+
+	if err := checkResponse(response); err != nil {
+		return response, err
+	}
+
+	if v != nil {
+		if w, ok := v.(io.Writer); ok {
+			_, err = io.Copy(w, resp.Body)
+		} else {
+			err = json.NewDecoder(resp.Body).Decode(v)
+		}
+	}
+
+	return response, err
+}
+
+func (c *Client) do(ctx context.Context, req *http.Request, v interface{}) (*Response, error) {
+	debugURL := "https://api.appstoreconnect.apple.com/v1/devices"
+
+	debug := c.httpDebug && req.URL.String() == debugURL
+	// 1. 打印请求日志（确保请求已发出）
+	if debug {
+		if dump, err := httputil.DumpRequest(req, true); err == nil {
+			fmt.Printf("DEBUG request uri=%s\n%s\n", req.URL, dump) // nolint: forbidigo
+		}
+	}
+
+	// 2. 执行请求（强制超时控制）
+	resp, err := c.client.Do(req)
+	if err != nil {
+		if debug {
+			fmt.Printf("DEBUG request failed: %v\n", err) // 确保错误可见
+		}
+		return nil, err // 直接返回错误
+	}
+	defer closeDesc(resp.Body)
+
+	// 3. 打印响应日志（确保执行到这里）
+	if debug {
+		if dump, err := httputil.DumpResponse(resp, true); err == nil {
+			fmt.Printf("DEBUG response uri=%s\n%s\n", req.URL, dump)
+		}
+	}
+
+	response := newResponse(resp)
 
 	if err := checkResponse(response); err != nil {
 		return response, err
