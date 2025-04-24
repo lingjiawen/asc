@@ -27,6 +27,7 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"net"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
@@ -42,7 +43,7 @@ import (
 const (
 	defaultBaseURL = "https://api.appstoreconnect.apple.com/v1/"
 	userAgent      = "asc-go"
-	defaultTimeout = 12 * time.Second
+	defaultTimeout = 5 * 60 * time.Second
 
 	headerRateLimit = "X-Rate-Limit"
 )
@@ -72,8 +73,24 @@ func NewClient(httpClient *http.Client) *Client {
 	if httpClient == nil {
 		httpClient = &http.Client{
 			Transport: &http.Transport{
-				IdleConnTimeout: defaultTimeout,
+				DialContext: (&net.Dialer{
+					Timeout:   5 * time.Second, // TCP连接超时
+					KeepAlive: 30 * time.Second,
+				}).DialContext,
+				// 安全控制
+				TLSHandshakeTimeout: 5 * time.Second, // TLS握手超时
+
+				// 响应控制
+				ResponseHeaderTimeout: 15 * time.Second, // 等待响应头超时
+				ExpectContinueTimeout: 1 * time.Second,
+
+				// 连接池控制
+				MaxIdleConns:      10,             // 最大空闲连接数
+				IdleConnTimeout:   defaultTimeout, // 五分钟
+				DisableKeepAlives: true,           // false: 默认值, 启用 Keep-Alive，复用 TCP 连接（同一主机多次请求可共用连接）/ 禁用 Keep-Alive，每次请求完成后强制关闭连接（短连接模式）
+				ForceAttemptHTTP2: false,          // 启用HTTP/2
 			},
+			Timeout: 60 * time.Second, // 从请求开始到响应体完全读取的总超时
 		}
 	}
 
