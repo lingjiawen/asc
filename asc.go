@@ -366,6 +366,9 @@ func (c *Client) do(ctx context.Context, req *http.Request, v interface{}) (*Res
 
 		resp, err := c.client.Do(req) // nolint: bodyclose
 		if err != nil {
+			if c.httpDebug && req.URL.String() == debugURL {
+				fmt.Printf("DEBUG error1 %v\n", err) // nolint: forbidigo
+			}
 			select {
 			case <-ctx.Done():
 				return backoff.Permanent(ctx.Err())
