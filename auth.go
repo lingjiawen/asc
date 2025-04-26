@@ -180,23 +180,33 @@ func (g *standardJWTGenerator) claims() jwt.Claims {
 }
 
 func newTransport(proxyURL *url.URL) http.RoundTripper {
+	// 配置代理
+	// 客户端 → 代理服务器 → 目标服务器
+	// 超时参数	                   作用范围	                           代理环境下的具体含义
+	// DialContext.Timeout	  TCP 连接建立阶段                  客户端到代理服务器的连接超时
+	// TLSHandshakeTimeout	  TLS 握手阶段                     客户端与代理服务器之间的 TLS 握手超时
+	// ResponseHeaderTimeout  从请求发送到收到响应头的总时间	   客户端→代理→目标服务器的全链路响应头超时
+	// ExpectContinueTimeout  等待 "100 Continue" 响应的时间	客户端等待代理返回 "100 Continue" 的时间
+	// IdleConnTimeout	      空闲连接保持时间	                 客户端与代理服务器之间的空闲连接保持时间
+
 	return &http.Transport{
 		Proxy: http.ProxyURL(proxyURL),
 		DialContext: (&net.Dialer{
-			Timeout:   5 * time.Second, // TCP连接超时
-			KeepAlive: 30 * time.Second,
+			Timeout:   15 * time.Second, // 到代理的TCP连接超时
+			KeepAlive: 30 * time.Second, // 保持活跃探测间隔
 		}).DialContext,
 		// 安全控制
-		TLSHandshakeTimeout: 5 * time.Second, // TLS握手超时
+		TLSHandshakeTimeout: 10 * time.Second, // 到代理的TLS握手超时
 
 		// 响应控制
-		ResponseHeaderTimeout: 15 * time.Second, // 等待响应头超时
-		ExpectContinueTimeout: 1 * time.Second,
+		ResponseHeaderTimeout: 50 * time.Second, // 全链路响应头超时
+		ExpectContinueTimeout: 2 * time.Second,  // // 等待代理的100 Continue
 
 		// 连接池控制
-		MaxIdleConns:      10, // 最大空闲连接数
-		IdleConnTimeout:   defaultTimeout,
-		DisableKeepAlives: true,  // false: 默认值, 启用 Keep-Alive，复用 TCP 连接（同一主机多次请求可共用连接）/ 禁用 Keep-Alive，每次请求完成后强制关闭连接（短连接模式）
-		ForceAttemptHTTP2: false, // 启用HTTP/2
+		MaxIdleConns:        50,             // 最大空闲连接数
+		MaxIdleConnsPerHost: 10,             // 每个主机最大空闲连接
+		IdleConnTimeout:     defaultTimeout, // // 到代理的空闲连接超时
+		DisableKeepAlives:   true,           // false: 默认值, 启用 Keep-Alive，复用 TCP 连接（同一主机多次请求可共用连接）/ 禁用 Keep-Alive，每次请求完成后强制关闭连接（短连接模式）
+		ForceAttemptHTTP2:   false,          // 启用HTTP/2
 	}
 }
