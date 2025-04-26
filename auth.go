@@ -28,6 +28,7 @@ import (
 	"fmt"
 	"net"
 	"net/http"
+	"net/url"
 	"time"
 
 	"github.com/dgrijalva/jwt-go/v4"
@@ -63,6 +64,10 @@ type standardJWTGenerator struct {
 // NewTokenConfig returns a new AuthTransport instance that customizes the Authentication header of the request during transport.
 // It can be customized further by supplying a custom http.RoundTripper instance to the Transport field.
 func NewTokenConfig(keyID string, issuerID string, expireDuration time.Duration, privateKey []byte) (*AuthTransport, error) {
+	return NewTokenConfigWithProxy(keyID, issuerID, expireDuration, privateKey, nil)
+}
+
+func NewTokenConfigWithProxy(keyID string, issuerID string, expireDuration time.Duration, privateKey []byte, proxyURL *url.URL) (*AuthTransport, error) {
 	key, err := parsePrivateKey(privateKey)
 	if err != nil {
 		return nil, err
@@ -77,7 +82,7 @@ func NewTokenConfig(keyID string, issuerID string, expireDuration time.Duration,
 	_, err = gen.Token()
 
 	return &AuthTransport{
-		Transport:    newTransport(),
+		Transport:    newTransport(proxyURL),
 		jwtGenerator: gen,
 	}, err
 }
@@ -119,7 +124,7 @@ func (t *AuthTransport) Client() *http.Client {
 
 func (t *AuthTransport) transport() http.RoundTripper {
 	if t.Transport == nil {
-		t.Transport = newTransport()
+		t.Transport = newTransport(nil)
 	}
 
 	return t.Transport
@@ -174,8 +179,9 @@ func (g *standardJWTGenerator) claims() jwt.Claims {
 	}
 }
 
-func newTransport() http.RoundTripper {
+func newTransport(proxyURL *url.URL) http.RoundTripper {
 	return &http.Transport{
+		Proxy: http.ProxyURL(proxyURL),
 		DialContext: (&net.Dialer{
 			Timeout:   5 * time.Second, // TCP连接超时
 			KeepAlive: 30 * time.Second,
