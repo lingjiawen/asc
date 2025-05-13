@@ -192,21 +192,21 @@ func newTransport(proxyURL *url.URL) http.RoundTripper {
 	return &http.Transport{
 		Proxy: http.ProxyURL(proxyURL),
 		DialContext: (&net.Dialer{
-			Timeout:   15 * time.Second, // 到代理的TCP连接超时
+			Timeout:   30 * time.Second, // 到代理的TCP连接超时
 			KeepAlive: 30 * time.Second, // 保持活跃探测间隔
 		}).DialContext,
 		// 安全控制
-		TLSHandshakeTimeout: 10 * time.Second, // 到代理的TLS握手超时
+		TLSHandshakeTimeout: 20 * time.Second, // 到代理的TLS握手超时
 
 		// 响应控制
-		ResponseHeaderTimeout: 50 * time.Second, // 全链路响应头超时
+		ResponseHeaderTimeout: 60 * time.Second, // 全链路响应头超时
 		ExpectContinueTimeout: 2 * time.Second,  // // 等待代理的100 Continue
 
 		// 连接池控制
-		MaxIdleConns:        50,             // 最大空闲连接数
-		MaxIdleConnsPerHost: 10,             // 每个主机最大空闲连接
+		MaxIdleConns:        100,            // 最大空闲连接数
+		MaxIdleConnsPerHost: 20,             // 每个主机最大空闲连接
 		IdleConnTimeout:     defaultTimeout, // // 到代理的空闲连接超时
-		DisableKeepAlives:   true,           // false: 默认值, 启用 Keep-Alive，复用 TCP 连接（同一主机多次请求可共用连接）/ 禁用 Keep-Alive，每次请求完成后强制关闭连接（短连接模式）
-		ForceAttemptHTTP2:   false,          // 启用HTTP/2
+		DisableKeepAlives:   false,          // false: 默认值, 启用 Keep-Alive，复用 TCP 连接（同一主机多次请求可共用连接）/ 禁用 Keep-Alive，每次请求完成后强制关闭连接（短连接模式）
+		ForceAttemptHTTP2:   true,           // 启用HTTP/2
 	}
 }
