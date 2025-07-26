@@ -103,6 +103,8 @@ const (
 	CapabilityTypeHealthKitAccess             CapabilityType = "HEALTHKIT_ACCESS"              // [新增]
 	CapabilityTypeKeychainAccessGroups        CapabilityType = "KEYCHAIN_ACCESS_GROUPS"        // [新增]
 	CapabilityTypeHealthKitBackgroundDelivery CapabilityType = "HEALTHKIT_BACKGROUND_DELIVERY" // [新增]
+
+	CapabilityTypeIPADCAMERAMULTITASKING CapabilityType = "IPAD_CAMERA_MULTITASKING" // [新增]
 )
 
 var AllCapabilityTypes = []CapabilityType{
@@ -144,12 +146,14 @@ var AllCapabilityTypes = []CapabilityType{
 	CapabilityTypeHealthKitAccess,
 	CapabilityTypeKeychainAccessGroups,
 	CapabilityTypeHealthKitBackgroundDelivery,
+	CapabilityTypeIPADCAMERAMULTITASKING,
 }
 
 var entitlementToCapability = map[string]CapabilityType{
 	"com.apple.developer.healthkit.access":                                     CapabilityTypeHealthKitAccess,             // [新增]
 	"keychain-access-groups":                                                   CapabilityTypeKeychainAccessGroups,        // [新增]
 	"com.apple.developer.healthkit.background-delivery":                        CapabilityTypeHealthKitBackgroundDelivery, // [新增]
+	"com.apple.developer.avfoundation.multitasking-camera-access":              CapabilityTypeIPADCAMERAMULTITASKING,      // [新增]
 	"com.apple.developer.networking.wifi-info":                                 CapabilityTypeAccessWifiInformation,
 	"com.apple.developer.appleid-auth":                                         CapabilityTypeAppleIDAuth, // [新增]
 	"com.apple.developer.in-app-payments":                                      CapabilityTypeApplePay,
@@ -235,6 +239,7 @@ var capabilityToChineseMap = map[CapabilityType]string{
 	CapabilityTypeHealthKitAccess:                "健康数据访问权限", // [新增]
 	CapabilityTypeKeychainAccessGroups:           "钥匙串访问组",   // [新增]
 	CapabilityTypeHealthKitBackgroundDelivery:    "健康数据后台更新", // [新增]
+	CapabilityTypeIPADCAMERAMULTITASKING:         "相机多任务",    // [新增]
 }
 
 func GetCapabilityForEntitlement(entitlement string) (CapabilityType, bool) {
